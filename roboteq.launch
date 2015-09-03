@@ -1,0 +1,21 @@
+<launch>
+
+<node pkg="roboteq" type="roboteq" name="roboteq" output="screen">
+   <param name="devicepath" value="/dev/ttyUSB1" />
+   <param name="roboteq_baud" value="9600"/>
+   <param name="acceleration" value="0x30" />
+   <param name="rc_mode_on_shutdown" value="true" />
+   <param name="gear_ratio" value="87.967" />
+   <param name="axle_length" value="0.54" />
+   <param name="wheel_circumference" value="2.135" />
+   <param name="encoder_ppr" value="500" />
+   <param name="encoder_base_divider" value="63" />
+   <param name="invert_directions" value="false" />
+   <param name="Kp" value="3.0" />
+   <param name="Ki" value="0.6" />
+   <param name="Kd" value="0.0" />
+   <param name="iMax" value="10.0" />
+   <param name="iMin" value="-10.0" />
+   <param name="controller_current_limit" value="22" />
+</node>
+</launch>
