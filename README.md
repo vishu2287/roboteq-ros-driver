@@ -15,32 +15,41 @@ ROS driver for serial Roboteq motor controllers. This driver is suitable for use
 
 The node subscribes to the folloing topics: 
 
+```
 Topic: roboteq_cmd_vel
 Type: geometry_msgs::Twist
-Contents:	linear.x;
-			linear.y;
-			angular.z;
+Contents:
+	linear.x;
+	linear.y;
+	angular.z;
+```
 
+```
 Topic: io_steer_angle
 Type: geometry_msgs::Twist
-Contents: angular.z;
-
+Contents:
+	angular.z;
+```
 
 The node publishes to the following topics:
 
+```
 Topic: roboteq_raw_vel
 Type: geometry_msgs::Twist
-Contents:	linear.x
-			linear.y
-			angular.z
+Contents:
+	linear.x
+	linear.y
+	angular.z
+```
 
-
+```
 Topic: roboteq_estimated_pos
 Type: geometry_msgs::Twist
-Contents:	linear.x
-			linear.y
-			angular.z
-
+Contents:
+	linear.x
+	linear.y
+	angular.z
+```
 
 The ROSlaunch script includes all the configurable parameters.
 
