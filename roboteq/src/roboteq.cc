@@ -95,52 +95,52 @@ SOFTWARE.
 #include <std_msgs/Bool.h>
 
 // settings
-#define SERIAL_BUFF_SIZE		128
-#define MAX_MOTOR_SPEED			127
-#define ROBOTEQ_CON_TIMEOUT		10	// seconds to time-out on setting RS-232 mode
-#define ROBOTEQ_DEFAULT_BAUD		9600
-#define INPUT_SWITCHES_FUNCTIONS 	0x00	// sets the input switches to none.
+#define SERIAL_BUFF_SIZE            128
+#define MAX_MOTOR_SPEED             127
+#define ROBOTEQ_CON_TIMEOUT         10      // seconds to time-out on setting RS-232 mode
+#define ROBOTEQ_DEFAULT_BAUD        9600
+#define INPUT_SWITCHES_FUNCTIONS    0x00    // sets the input switches to none.
 
 // Default parameter settings
-#define DEFAULT_CONTROLLER_CURRENT_LIMIT	22	// Amperes
-#define DEFAULT_ACCELERATION			0x30	// About 2 second from stop to full speed.
-#define DEFAULT_ENCODER_TIME_BASE		0x16
+#define DEFAULT_CONTROLLER_CURRENT_LIMIT	22      // Amperes
+#define DEFAULT_ACCELERATION			    0x30	// About 2 second from stop to full speed.
+#define DEFAULT_ENCODER_TIME_BASE		    0x16
 #define DEFAULT_ENCODER_DISTANCE_DIVIDER	0x08
-#define DEFAULT_GEAR_RATIO			1
-#define DEFAULT_WHEEL_CIRCUMFERENCE		1
-#define DEFAULT_AXLE_LENGTH			1
-#define DEFAULT_ENCODER_PPR			500
-#define DEFAULT_INVERT_DIRECTIONS		false
-#define DEFAULT_RC_MODE_ON_SHUTDOWN		true
-#define DEFAULT_KP                              1.0
-#define DEFAULT_KI                              0.0
-#define DEFAULT_KD                              0.0
-#define DEFAULT_IMAX                            10.0
-#define DEFAULT_IMIN                            -10.0
+#define DEFAULT_GEAR_RATIO                  1
+#define DEFAULT_WHEEL_CIRCUMFERENCE         1
+#define DEFAULT_AXLE_LENGTH                 1
+#define DEFAULT_ENCODER_PPR                 500
+#define DEFAULT_INVERT_DIRECTIONS           false
+#define DEFAULT_RC_MODE_ON_SHUTDOWN         true
+#define DEFAULT_KP                          1.0
+#define DEFAULT_KI                          0.0
+#define DEFAULT_KD                          0.0
+#define DEFAULT_IMAX                        10.0
+#define DEFAULT_IMIN                        -10.0
 
 // Parameter addresses
-#define CHANNEL1_OPERATING_MODE_ADDRESS	0x80
+#define CHANNEL1_OPERATING_MODE_ADDRESS     0x80
 #define CHANNEL2_OPERATING_MODE_ADDRESS 	0x81
-#define CONTROLLER_IDENTIFICATION_ADDRESS 	0x8A
-#define CONTROLLER_STATUS_ADDRESS 		0x89
-#define INPUT_CONTROL_MODE_ADDRESS		0x00
-#define MOTOR_CONTROL_MODE_ADDRESS		0x01
-#define CURRENT_LIMIT_ADDRESS			0x02
-#define ACCELERATION_ADDRESS			0x03
-#define INPUT_SWITCHES_FUNCTION_ADDRESS	0x04
-#define ENCODER1_TIME_BASE_ADDRESS		0xA2
-#define ENCODER2_TIME_BASE_ADDRESS		0xA3
+#define CONTROLLER_IDENTIFICATION_ADDRESS   0x8A
+#define CONTROLLER_STATUS_ADDRESS           0x89
+#define INPUT_CONTROL_MODE_ADDRESS          0x00
+#define MOTOR_CONTROL_MODE_ADDRESS          0x01
+#define CURRENT_LIMIT_ADDRESS               0x02
+#define ACCELERATION_ADDRESS                0x03
+#define INPUT_SWITCHES_FUNCTION_ADDRESS     0x04
+#define ENCODER1_TIME_BASE_ADDRESS          0xA2
+#define ENCODER2_TIME_BASE_ADDRESS          0xA3
 #define ENCODER_DISTANCE_DIVIDER_ADDRESS	0xA5
-#define EXPONENTIATION_CHANNEL1_ADDRESS	0x07
-#define EXPONENTIATION_CHANNEL2_ADDRESS	0x08
+#define EXPONENTIATION_CHANNEL1_ADDRESS     0x07
+#define EXPONENTIATION_CHANNEL2_ADDRESS     0x08
 #define PID_PROPORTIONAL_GAIN1_ADDRESS		0x82
 #define PID_PROPORTIONAL_GAIN2_ADDRESS		0x83
-#define PID_INTEGRAL_GAIN1_ADDRESS		0x84
-#define PID_INTEGRAL_GAIN2_ADDRESS		0x85
+#define PID_INTEGRAL_GAIN1_ADDRESS          0x84
+#define PID_INTEGRAL_GAIN2_ADDRESS          0x85
 #define PID_DIFFERENTIAL_GAIN1_ADDRESS		0x86
 #define PID_DIFFERENTIAL_GAIN2_ADDRESS		0x87
 #define PID_PROPORTIONAL_GAINT_ADDRESS		0x11
-#define PID_INTEGRAL_GAINT_ADDRESS              0x0F
+#define PID_INTEGRAL_GAINT_ADDRESS          0x0F
 #define PID_DIFFERENTIAL_GAINT_ADDRESS		0x10
 
 // Constants
@@ -152,8 +152,8 @@ SOFTWARE.
 #define MAX_PID_GAIN					63.0/8.0
 #define EXPONENTIATION_LINEAR				0x00
 #define EXPONENTIATION_STRONG_EXP			0x02
-#define INPUT_CONTROL_MODE				0x01
-#define ENC_BUFF_SIZE   8
+#define INPUT_CONTROL_MODE				    0x01
+#define ENC_BUFF_SIZE                       8
 
 #define SLEEP_TIME 20000
 #ifndef CRTSCTS
@@ -278,50 +278,44 @@ int Set_channels_PIDvalues() {
     if (checkConfigParameter('^', PID_PROPORTIONAL_GAIN1_ADDRESS, (unsigned char) (Kp * 8)) != 0) {
         ROS_WARN("Error setting channel one proportional gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel one proportional gain successfully");
+    }
     
     if (checkConfigParameter('^', PID_PROPORTIONAL_GAIN2_ADDRESS, (unsigned char) (Kp * 8)) != 0) {
         ROS_WARN("Error setting channel two proportional gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel two proportional gain successfully");
+    }
     
     if (checkConfigParameter('^', PID_INTEGRAL_GAIN1_ADDRESS, (unsigned char) (Ki * 8)) != 0) {
         ROS_WARN("Error setting channel one integral gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel one integral gain successfully");
+    }
     
     if (checkConfigParameter('^', PID_INTEGRAL_GAIN2_ADDRESS, (unsigned char) (Ki * 8)) != 0) {
         ROS_WARN("Error setting channel two integral gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel two integral gain successfully");
+    }
     
     if (checkConfigParameter('^', PID_DIFFERENTIAL_GAIN1_ADDRESS, (unsigned char) (Kd * 8)) != 0) {
         ROS_WARN("Error setting channel one differential gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel one diferential gain successfully");
+    }
     
     if (checkConfigParameter('^', PID_DIFFERENTIAL_GAIN2_ADDRESS, (unsigned char) (Kd * 8)) != 0) {
         ROS_WARN("Error setting channel two differential gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel two differential gain successfully");
+    }
     
     // Sending ^FF to apply new settings
     strcpy(serialout_buff, "^FF\r");
@@ -339,8 +333,7 @@ int Set_channels_PIDvalues() {
     if (command_status != '+') {
         ROS_WARN("Falied to apply new PID settings");
         error=1;
-    }
-    else{
+    } else {
         ROS_INFO("New PID settings applied successfully");
     }
     
@@ -358,32 +351,24 @@ int MainQuit() {
     
     if (rc_mode_on_shutdown == true) {
         
-        //printf("Turning to radio mode\n");
         ROS_INFO("Turning to radio mode");
         
         // Reset the input exponentiation mode to strong exponential.
         if (checkConfigParameter('^', EXPONENTIATION_CHANNEL1_ADDRESS, EXPONENTIATION_STRONG_EXP) != 0) {
-            //printf("Error setting channel 1 exponentiation to strong expoential\n");
             ROS_ERROR("Error setting channel 1 exponentiation to strong expoential");
             error=1;
-        }
-        else{
-            //printf("Set channel 1 exponentiation to strong expoential successfully\n");
+        } else {
             ROS_INFO("Set channel 1 exponentiation to strong expoential successfully");
         }
         
         if (checkConfigParameter('^', EXPONENTIATION_CHANNEL2_ADDRESS, EXPONENTIATION_STRONG_EXP) != 0) {
-            //printf("Error setting channel 2 exponentiation to strong expoential\n");
             ROS_ERROR("Error setting channel 2 exponentiation to strong expoential");
             error=1;
-        }
-        else{
-            //printf("Set channel 2 exponentiation to strong expoential successfully\n");
+        } else {
             ROS_INFO("Set channel 2 exponentiation to strong expoential successfully");
         }
         
         // Set roboteq to radio mode
-        //printf("Set roboteq in radio mode\n");
         ROS_INFO("Set roboteq in radio mode");
         strcpy(serialout_buff, "^00 00\r");
         write(roboteq_fd, serialout_buff, strlen(serialout_buff));
@@ -398,22 +383,17 @@ int MainQuit() {
         usleep(SLEEP_TIME);
         */
         
-        //printf("Set roboteq in closed loop mode\n");
         ROS_INFO("Set roboteq in closed loop mode");
         motor_control_mode = MOTOR_CONTROL_MODE_CLOSED_LOOP;
         if (checkConfigParameter('^', MOTOR_CONTROL_MODE_ADDRESS, motor_control_mode) != 0) {
-            //printf("Error setting motor control mode\n");
             ROS_ERROR("Error setting motor control mode");
             error=1;
-            //return -1;
         }
         else{
-            //printf("Set Motor control mode successfully\n");
             ROS_INFO("Set Motor control mode successfully");
         }
         
         // Reset de controller to apply new settings
-        //printf("Rebooting the roboteq\n");
         ROS_INFO("Rebooting the roboteq");
         strcpy(serialout_buff, "%rrrrrr\r");
         write(roboteq_fd, serialout_buff, strlen(serialout_buff));
@@ -422,18 +402,16 @@ int MainQuit() {
         
         tcflush(roboteq_fd, TCIFLUSH); // Clear all the reboot crap out of the input buffer (after a reset)
         
-        //printf("RADIO MODE ON\n");
         ROS_INFO("RADIO MODE ON");
     }
     
     close(roboteq_fd);
     
     if(error)
-    return -1;
+        return -1;
     
     return 0;
 }
-
 
 int MainSetup() {
     int returned_value;
@@ -491,7 +469,6 @@ int MainSetup() {
         tcgetattr(roboteq_fd, &options);
         
         // default is 9600 unless otherwise specified
-        
         if (roboteq_baud == 4800) {
             cfsetispeed(&options, B4800);
             cfsetospeed(&options, B4800);
@@ -525,7 +502,6 @@ int MainSetup() {
     
     // Compute the encoder speed to RPM conversion factor.
     speed_to_rpm = (60.0 * 1000000.0) / (((double) encoder_ppr) * 4.0 * 256.0 * (((double) encoder_time_base) + 1.0));
-    //speed_to_rpm = (60.0 * 1000000.0) / (((double) encoder_ppr) * 256.0 * (((double) encoder_time_base) + 1.0));
     
     // Compute the speed value to m/s conversion factor.
     speed_per_tick = (speed_to_rpm * wheel_circumference) / (gear_ratio * 60);
@@ -553,9 +529,12 @@ int MainSetup() {
     strcpy(serialout_buff, "%rrrrrr\r");
     write(roboteq_fd, serialout_buff, strlen(serialout_buff));
     tcdrain(roboteq_fd);
-    sleep(2); // Sleep for two seconds to give the controller sufficient time to reboot.
     
-    tcflush(roboteq_fd, TCIFLUSH); // Clear all the reboot crap out of the input buffer (after a reset).
+    // Sleep for two seconds to give the controller sufficient time to reboot.
+    sleep(2);
+    
+    // Clear all the reboot crap out of the input buffer (after a reset).
+    tcflush(roboteq_fd, TCIFLUSH); 
     
     // initialize RoboteQ to RS-232 mode
     ROS_INFO("Initializing roboteq in RS-232 mode");
@@ -572,7 +551,7 @@ int MainSetup() {
     serialin_buff[SERIAL_BUFF_SIZE - 1] = 0x00; // Null terminate our buffer to make sure sscanf doesn't run amok.
     
     if(strstr(serialin_buff, "OK")!=NULL)
-    ROS_INFO("Received OK from the controller");
+        ROS_INFO("Received OK from the controller");
     else{
         ROS_ERROR("Did not Receive OK message from the controller");
         return -1;
@@ -602,7 +581,9 @@ int MainSetup() {
     
     memset(serialin_buff, 0, SERIAL_BUFF_SIZE);
     ret = read(roboteq_fd, serialin_buff, SERIAL_BUFF_SIZE - 1);
-    serialin_buff[SERIAL_BUFF_SIZE - 1] = 0x00; // Null terminate our buffer to make sure sscanf doesn't run amok.
+    
+    // Null terminate our buffer to make sure sscanf doesn't run amok.
+    serialin_buff[SERIAL_BUFF_SIZE - 1] = 0x00;
     
     ret = sscanf(serialin_buff, "%*3c %2X", &returned_value);
     if (ret != 1) {
@@ -618,7 +599,8 @@ int MainSetup() {
         } else if (returned_value & 0x08) {
             ROS_INFO("AX3500 found");
         } else {
-            ROS_WARN("Unknown controller found"); // Weird...this shouldn't happen.
+            // Weird...this shouldn't happen.
+            ROS_WARN("Unknown controller found");
         }
         
         if (returned_value & 0x20) {
@@ -643,42 +625,37 @@ int MainSetup() {
     if (checkConfigParameter('^', MOTOR_CONTROL_MODE_ADDRESS, motor_control_mode) != 0) {
         ROS_ERROR("Error setting motor control mode");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set Motor control mode successfully");
+    }
     
     if (checkConfigParameter('^', CURRENT_LIMIT_ADDRESS, controller_current_limit_value) != 0) {
         ROS_ERROR("Error setting controller current limit");
         error=1;
-        //return -1;
-    }
-    else
+    }  else {
         ROS_INFO("Set motor controler current limit successfully");
+    }
     
     if (checkConfigParameter('^', ACCELERATION_ADDRESS, acceleration) != 0) {
         ROS_ERROR("Error setting acceleration profile");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set acceleration profile successfully");
+    }
     
     if (checkConfigParameter('^', EXPONENTIATION_CHANNEL1_ADDRESS, EXPONENTIATION_LINEAR) != 0) {
         ROS_ERROR("Error setting channel 1 exponentiation to linear");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel 1 exponentiation to linear successfully");
+    }
     
     if (checkConfigParameter('^', EXPONENTIATION_CHANNEL2_ADDRESS, EXPONENTIATION_LINEAR) != 0) {
         ROS_ERROR("Error setting channel 2 exponentiation to linear");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set channel 2 exponentiation to linear successfully");
+    }
     
     if (encoder_present != 0) {
         
@@ -686,35 +663,36 @@ int MainSetup() {
         if (checkConfigParameter('*', ENCODER1_TIME_BASE_ADDRESS, encoder_time_base) != 0) {
             ROS_ERROR("Error setting encoder one time base");
             error=1;
-            //return -1;
-        }
-        else
+        } else {
             ROS_INFO("Set encoder one time base successfully");
+        }
         
         if (checkConfigParameter('*', ENCODER2_TIME_BASE_ADDRESS, encoder_time_base) != 0) {
             ROS_ERROR("Error setting encoder two time base");
             error=1;
-            //return -1;
-        }
-        else
+        } else {
             ROS_INFO("Set encoder two time base successfully");
+        }
         
         if (checkConfigParameter('*', ENCODER_DISTANCE_DIVIDER_ADDRESS, encoder_distance_divider) != 0) {
             ROS_ERROR("Error setting encoder distance divider");
             error=1;
-            //return -1;
-        }
-        else
+        } else {
             ROS_INFO("Set encoder distance divider successfully");
+        }
+        
     }
     
     // Reboot the controller to apply new settings (if not yet...)
     strcpy(serialout_buff, "%rrrrrr\r");
     write(roboteq_fd, serialout_buff, strlen(serialout_buff));
     tcdrain(roboteq_fd);
-    sleep(2); // Sleep for two seconds to give the controller sufficient time to reboot.
     
-    tcflush(roboteq_fd, TCIFLUSH); // Clear all the reboot crap out of the input buffer (after a reset).
+    // Sleep for two seconds to give the controller sufficient time to reboot.
+    sleep(2);
+    
+    // Clear all the reboot crap out of the input buffer (after a reset).
+    tcflush(roboteq_fd, TCIFLUSH); 
     
     count_enc_1 = 0;
     count_enc_2 = 0;
@@ -731,26 +709,23 @@ int MainSetup() {
     if (checkConfigParameter('^', PID_PROPORTIONAL_GAINT_ADDRESS, (unsigned char) (Kp * 8)) != 0) {
         ROS_WARN("Error setting total proportional gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set total proportional gain sucessfully");
+    }
     
     if (checkConfigParameter('^', PID_INTEGRAL_GAINT_ADDRESS, (unsigned char) (Ki * 8)) != 0) {
         ROS_WARN("Error setting total integral gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set total integral gain sucessfully");
+    }
     
     if (checkConfigParameter('^', PID_DIFFERENTIAL_GAINT_ADDRESS, (unsigned char) (Kd * 8)) != 0) {
         ROS_WARN("Error setting total differential gain");
         error=1;
-        //return -1;
-    }
-    else
+    } else {
         ROS_INFO("Set total differential gain sucessfully");
+    }
     
     Set_channels_PIDvalues();
     
@@ -771,7 +746,7 @@ int MainSetup() {
     setup_ok=true;
     
     if(error)
-    return -1;
+        return -1;
     
     return 0;
 }
@@ -809,7 +784,6 @@ int checkConfigParameter(char prefix, int address, int value) {
         usleep(SLEEP_TIME);
         
         // Check that the command was received ok.
-        
         memset(serialin_buff, 0, SERIAL_BUFF_SIZE);
         ret = read(roboteq_fd, serialin_buff, SERIAL_BUFF_SIZE - 1);
         serialin_buff[SERIAL_BUFF_SIZE - 1] = 0x00; // Null terminate our buffer to make sure sscanf doesn't run amok.
@@ -818,7 +792,8 @@ int checkConfigParameter(char prefix, int address, int value) {
         
         if (ret != 1 || command_status != '+') {
             ROS_WARN("Error writing command in flash");
-            return -2; // An error occured writing the command.
+            // An error occured writing the command.
+            return -2;
         }
     }
     return 0;
@@ -833,6 +808,7 @@ double get_time(void) {
 }
 
 int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double rotational_velocity) {
+    
     //unsigned char forward_value, rotational_value;
     unsigned char Vif_value, Vof_value;
     char returned_value;
@@ -859,27 +835,19 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
     //ROS_DEBUG("pidTerm %f\n", pidTerm);
     
     if (forward_velocity_x != 0.0) {
-        
         if (fabs(rotational_velocity) > MIN_FLOAT) {
             //ROS_DEBUG("rotational_velocity %f\n", rotational_velocity);
             Rsteer = L / sin(rotational_velocity);
-            
             //Rback = sqrt((pow(Rsteer, 2) - pow(L, 2)));
             //Rrobot = sqrt((pow(Rback, 2) + pow((L / 2), 2)));
-            
-            if (forward_velocity_x > 0.0){
-                
+            if (forward_velocity_x > 0.0){           
                 Vof = ((Rsteer + B / 2) / Rsteer) * forward_velocity_x;
                 Vif = ((Rsteer - B / 2) / Rsteer) * forward_velocity_x;
-            }
-            else if (forward_velocity_x < 0.0){
-                
+            } else if (forward_velocity_x < 0.0){   
                 Vif = ((Rsteer + B / 2) / Rsteer) * forward_velocity_x;
                 Vof = ((Rsteer - B / 2) / Rsteer) * forward_velocity_x;
             }
-            
         } else {
-            
             //ROS_DEBUG("Rotational velocity zero!\n");
             Vof = forward_velocity_x;
             Vif = Vof;
@@ -887,38 +855,30 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
         
         // If desired angle changed
         if (last_desired_angle != desired_angle) {
-            //ROS_DEBUG("desired angle changed: last %f new %f\n", this->last_desired_angle, desired_angle);
-            
+            //ROS_DEBUG("desired angle changed: last %f new %f\n", this->last_desired_angle, desired_angle);     
             if (encoder_angle <= desired_angle) {
                 //ROS_DEBUG("right turn!\n");
                 right_turn = 1;
                 left_turn = 0;
-                
             } else if (encoder_angle > desired_angle) {
                 //ROS_DEBUG("left turn!\n");
                 right_turn = 0;
                 left_turn = 1;
             }
-            
             last_desired_angle = desired_angle;
         }
         
         //Speed up steering angle using turnrate factor
-        //printf("Enc angle %f rot vel %f\n",encoder_angle,rotational_velocity);
-        
-        
         ROS_DEBUG("Before pidTerm Vof: %f Vif: %f\n", Vof, Vif);
         
-        if (right_turn) {
-            
+        if (right_turn) {   
             PID_mul_factor = 1.0 + pidTerm;
             ROS_DEBUG("Turning right with PID_mul_factor %f\n", PID_mul_factor);
-            
+   
             if (forward_velocity_x > 0.0){
                 Vof = Vof * PID_mul_factor;
                 Vif = Vif;
-            }
-            else if (forward_velocity_x < 0.0){
+            } else if (forward_velocity_x < 0.0){
                 Vif = Vif * PID_mul_factor;
                 Vof = Vof;
             }
@@ -927,13 +887,11 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
             
             PID_mul_factor = 1.0 + pidTerm;
             ROS_DEBUG("Turning left with PID_mul_factor %f\n", PID_mul_factor);
-            // Caso crescente
             
             if (forward_velocity_x > 0.0){
                 Vif = Vif * PID_mul_factor;
                 Vof = Vof;
-            }
-            else if (forward_velocity_x < 0.0){
+            } else if (forward_velocity_x < 0.0){
                 Vof = Vof * PID_mul_factor;
                 Vif = Vif;
             }
@@ -953,6 +911,7 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
         } else {
             Vof_value = (unsigned char) (fabs(Vof) / speed_per_tick);
         }
+        
         ROS_DEBUG("VIF_value %d VOF_value %d Max Velocity %f speed per tick %f\n", Vif_value, Vof_value, max_forward_velocity, speed_per_tick);
         
     } else {
@@ -961,9 +920,7 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
         Vof_value = Vif_value;
     }
     
-    //printf("Channel A ->   %f Channel B ->  %f      Frwd -> %f\n",Vif, Vof,forward_velocity);
-    
-    /**************************************************/
+    ROS_DEBUG("ChA: %f ChB: %f FrwdVel: %f\n", Vof, Vif, forward_velocity);
     
     // Check if we need to invert the velocities.
     if (invert_directions == true) {
@@ -999,11 +956,10 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
         if (returned_value != '+') {
             // Some kind of error happened.
             ROS_WARN("Error writing forward velocity command on channel one");
-            //return -1;
-        }
-        else{
+        } else {
             ROS_DEBUG("Forward velocity command set successully on channel one");
         }
+        
         // Write rotational velocity and check result.
         if (forward_velocity_x < 0) {
             sprintf(serialout_buff, "!b%.2X\r", Vof_value);
@@ -1024,12 +980,13 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
         if (returned_value != '+') {
             // Some kind of error happened.
             ROS_WARN("Error writing rotational velocity command on channel one");
-            //return -1;
         }
         else{
             ROS_DEBUG("Rotational velocity command set successully on channel one");
         }
+        
         switched = 1;
+    
     } else {
         if (forward_velocity_x < 0) {
             sprintf(serialout_buff, "!b%.2X\r", Vof_value);
@@ -1051,11 +1008,11 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
         if (returned_value != '+') {
             // Some kind of error happened.
             ROS_WARN("Error writing forward velocity command on channel two (switched)");
-            //return -1;
         }
         else{
             ROS_DEBUG("Forward velocity command set successully on channel two (switched)");
         }
+        
         // Write rotational velocity and check result.
         if (forward_velocity_x < 0) {
             sprintf(serialout_buff, "!a%.2X\r", Vif_value);
@@ -1076,7 +1033,6 @@ int WriteMotorVelocity(double forward_velocity_x, double turnrate_factor, double
         if (returned_value != '+') {
             // Some kind of error happened.
             ROS_WARN("Error writing rotational velocity command on channel two (switched)");
-            //return -1;
         }
         else{
             ROS_DEBUG("Rotational velocity command set successully on channel two (switched)");
@@ -1098,43 +1054,6 @@ void UpdatePositionData() {
     double rpm1, rpm2;
     double speed1, speed2, speed_diff;
     double distance1, distance2, distance_diff;
-    
-    // Ok, the math for this section is a bit tricky. Wheel 1 is assumed to be on the right
-    // and a positive rotational velocity indicates the robot is turning left. To determine
-    // the rotational velocity we compute the difference in wheel velocities and then
-    // compute the rotational velocity by converting m/s to rad/s on a circle of radius
-    // axle length.
-    
-    /*
-    // Read in the current speed value.
-    strcpy(serialout_buff, "?Z\r");
-    write(roboteq_fd, serialout_buff, strlen(serialout_buff));
-    tcdrain(roboteq_fd);
-    usleep(SLEEP_TIME);
-    memset(serialin_buff, 0, SERIAL_BUFF_SIZE);
-    ret = read(roboteq_fd, serialin_buff, SERIAL_BUFF_SIZE - 1);
-    serialin_buff[SERIAL_BUFF_SIZE - 1] = 0x00;
-    ret = sscanf(serialin_buff, "%*2c %2X %2X", &speed1_value, &speed2_value);
-    if (ret != 2) {
-    return; // Well, best not to update the data without any data...
-    }
-    // Compute the speed (in m/s).
-    speed1 = ((double) speed1_value) * speed_per_tick;
-    speed2 = ((double) speed2_value) * speed_per_tick;
-    //printf("Reading ->  %2X	    %2X\n",speed1_value,speed2_value);
-    if (invert_directions == true) {
-    speed1 = -speed1;
-    speed2 = -speed2;
-    }
-    speed_diff = speed1 - speed2;
-    position_data->angular.z = (speed_diff / turning_circumference) * (2.0 * M_PI);
-    position_data->linear.x = 0.0;
-    if (fabs(speed1) > fabs(speed2)) {
-    position_data->linear.y = speed2;
-    } else {
-    position_data->linear.y = speed1;
-    }
-    */
     
     // Compute a new position. We don't use the speed data.
     tcflush(roboteq_fd, TCIOFLUSH);
@@ -1178,7 +1097,7 @@ void UpdatePositionData() {
         time_dif = cur_time - time_old;
     }
     
-    //printf(" Time: %f  Time old : %f Time dif : %f ",cur_time,time_old,time_dif);
+    //ROS_DEBUG(" Time: %f  Time old : %f Time dif : %f ",cur_time,time_old,time_dif);
     
     speed1 = (encoder1_count * 0.000048635 * 0.25) / (time_dif / 1000000);
     speed2 = (encoder2_count * 0.000048635 * 0.25) / (time_dif / 1000000);
@@ -1190,7 +1109,7 @@ void UpdatePositionData() {
     position_data.linear.x = speed2;
     position_data.linear.y = speed1;
     
-    //  printf("Reading ->  %d	    %d   time_dif %f speed1 %f speed2 %f\n", encoder1_count, encoder2_count,(float)time_dif, speed1, speed2);
+    //ROS_DEBUG("Reading ->  %d	    %d   time_dif %f speed1 %f speed2 %f\n", encoder1_count, encoder2_count,(float)time_dif, speed1, speed2);
     
     
     // NOTE!!! There could be a bug here. If the driver is pre-empted or the delay
@@ -1199,7 +1118,7 @@ void UpdatePositionData() {
     // command that would read out the values in both encoders simultaneously
     // but they don't. Solution, anyone?
     
-    //printf("%f	%f\n",(double)(encoder1_count),(double)(encoder2_count));
+    //ROS_DEBUG("%f	%f\n",(double)(encoder1_count),(double)(encoder2_count));
     
     rpm1 = (((double) encoder1_count) / ((double) encoder_ppr)) / gear_ratio;
     rpm2 = (((double) encoder2_count) / ((double) encoder_ppr)) / gear_ratio;
@@ -1254,7 +1173,7 @@ int ConvertEncoder(int ret) {
         
         if (('0' <= serialin_buff[4]) && (serialin_buff[4] <= '7')) {
             
-            // printf("ret POS %d\n", ret);
+            //ROS_DEBUG("ret POS %d\n", ret);
             
             serialin_buff[SERIAL_BUFF_SIZE - 1] = 0x00;
             ret = sscanf(serialin_buff, "%*3c %X", &enc_count);
@@ -1265,7 +1184,7 @@ int ConvertEncoder(int ret) {
             enc_count = -enc_count;
         } else {
             
-            // printf("ret NEG %d\n", ret);
+            //ROS_DEBUG("ret NEG %d\n", ret);
             
             // 13 is the max number of chars to read representing a number in the form of 8000 0000
             // the four first chars are to be ignored regarding the actual encoder value
@@ -1273,19 +1192,19 @@ int ConvertEncoder(int ret) {
             
             stop_pos = ENC_BUFF_SIZE - (ret - 5); //size of the buf minus the nr of chars to read
             
-            //  printf("stop pos %d ret %d\n",stop_pos,ret);
+            //ROS_DEBUG("stop pos %d ret %d\n",stop_pos,ret);
             for (t = 0; t < stop_pos; t++) {
                 enc_buff[t] = 'F';
             }
             
-            // printf("enc buf %s\n",enc_buff);
+            //ROS_DEBUG("enc buf %s\n",enc_buff);
             
             k = 4; // move the index to the start of data on serialin_buff
             if (t <= ENC_BUFF_SIZE) {
                 for (j = t; j < ENC_BUFF_SIZE; j++) {
                     enc_buff[j] = serialin_buff[k];
                     k++;
-                    //printf("enc buf %s t %d j %d k %d\n",enc_buff,t,j,k);
+                    //ROS_DEBUG("enc buf %s t %d j %d k %d\n",enc_buff,t,j,k);
                 }
             }
             
@@ -1294,20 +1213,20 @@ int ConvertEncoder(int ret) {
             if (ret != 1) {
                 return -1;
             }
-            // printf("enc_count converted %X\n",enc_count);
             
+            //ROS_DEBUG("enc_count converted %X\n",enc_count);
             enc_count = ~enc_count;
             
-            // printf("Negative enc_count converted %X\n",enc_count);
+            //ROS_DEBUG("Negative enc_count converted %X\n",enc_count);
             enc_count += 1;
             
-            //printf("Negative enc_count converted %X\n",enc_count);
+            //ROS_DEBUG("Negative enc_count converted %X\n",enc_count);
+            
         }
     }
-    //else
-    //   printf("\n Lower than 5!\n\n");
-    
+   
     return enc_count;
+    
 }
 
 
@@ -1457,9 +1376,8 @@ int main(int argc, char** argv) {
         if(!setup_ok){
             //roboteq Initialization
             if(MainSetup()==-1){
-                //ROS_ERROR("Unable to init roboteq");
+                ROS_ERROR("Unable to init roboteq");
                 ros::Duration(1).sleep();
-                //return -1;
             }else{
                 ROS_INFO("Roboteq initialized successfully");
             }
