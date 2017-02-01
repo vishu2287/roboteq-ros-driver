@@ -55,8 +55,7 @@ The ROSlaunch script includes all the configurable parameters.
 
 #Credits
 
-The code was ported from the Player - Stage Drivers from [here](http://sourceforge.net/projects/playerstage/files/Player/3.0.2/), [here](https://github.com/uml-robotics/player-2.1.3/blob/master/server/drivers/position/roboteq/roboteq.cc) and [here](https://wiki.csc.calpoly.edu/491W11-HRI/browser/Examples/my_erratic/erratic_robot/player/build/player-svn/server/drivers/position/roboteq/roboteq.cc?rev=3)
-
+The code was ported from the Player - Stage Drivers from [here](http://sourceforge.net/projects/playerstage/files/Player/3.0.2/) and [here](https://github.com/uml-robotics/player-2.1.3/blob/master/server/drivers/position/roboteq/roboteq.cc).
 
 
 
