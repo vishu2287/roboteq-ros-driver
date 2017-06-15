@@ -2,7 +2,7 @@
 
 ROS driver for serial Roboteq motor controllers. This driver is suitable for use with Roboteq's Advanced Digital Motor Controllers, and it was implememted to be compatible with ROS Indigo Igloo distribution.
 
-#Compatible Devices
+# Compatible Devices
 
 * ax500
 * ax1500
@@ -11,7 +11,7 @@ ROS driver for serial Roboteq motor controllers. This driver is suitable for use
 * ax3500
 
 
-#Usage
+# Usage
 
 The node subscribes to the folloing topics: 
 
@@ -53,7 +53,7 @@ Contents:
 
 The ROSlaunch script includes all the configurable parameters.
 
-#Credits
+# Credits
 
 The code was ported from the Player - Stage Drivers from [here](http://sourceforge.net/projects/playerstage/files/Player/3.0.2/) and [here](https://github.com/uml-robotics/player-2.1.3/blob/master/server/drivers/position/roboteq/roboteq.cc).
 
